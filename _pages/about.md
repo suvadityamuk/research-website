@@ -7,7 +7,7 @@ redirect_from:
   - /about.html
 ---
 
-# About Me
+<!-- # About Me -->
 
 I am a Master of Science student in Computer Science (Artificial Intelligence) at the University of Southern California (USC). My interests lie primarily in deep learning and generative AI (LLMs, Diffusion Models), focusing on applications in areas like Generative media, Computer Vision, and vision-language grounding. Previously, I obtained my Bachelor of Technology in Computer Science (AI) from NMIMS University (Mumbai, India).
 
