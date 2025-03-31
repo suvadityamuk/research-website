@@ -4,8 +4,8 @@ collection: publications
 category: manuscripts
 permalink: /publication/pyimagesearch-docker-3
 excerpt: 'Third and final part in series, about setting up GPU environments with Docker'
-date: 2015-10-16
-venue: 'Journal 1'
+date: 2024-10-16
+venue: 'PyImageSearch'
 # slidesurl: 'http://academicpages.github.io/files/slides3.pdf'
 paperurl: 'https://pyimagesearch.com/2023/10/16/setting-up-a-gpu-development-environment-using-docker/'
 citation: 'Mukherjee, S. “Setting Up a GPU Development Environment Using Docker,” PyImageSearch, P. Chugh, A. R. Gosthipaty, S. Huot, K. Kidriavsteva, and R. Raha, eds., 2023, https://pyimg.co/8bf3a'
