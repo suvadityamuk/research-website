@@ -44,6 +44,36 @@ redirect_from:
 
 <table style="width: 100%; border: none; border-collapse: collapse; font-size: 1.05em;">
 
+  <!-- Magnopus LLC -->
+  <tr style="border: none;">
+    <!-- Left Cell: Company & Position -->
+    <td style="border: none; vertical-align: top; padding-bottom: 5px;">
+      <strong>Magnopus LLC</strong><br>
+      Engineer I, R&D (Strike Team) (Full-time, Internship)
+    </td>
+    <!-- Right Cell: Date & Location -->
+    <td style="border: none; text-align: right; vertical-align: top; padding-bottom: 5px;">
+      <em style="font-weight: bold;">June 2025 - August 2025</em><br>
+      <em style="font-style: italic;">Los Angeles, CA, USA</em>
+    </td>
+  </tr>
+  <!-- Description Rows -->
+  <tr style="border: none;">
+    <td colspan="2" style="border: none; padding-left: 20px; vertical-align: top;">
+      <strong>The Wizard of Oz - Sphere:</strong> Helping solve broad-scale AI performance issues related to the project of releasing the original Wizard of Oz movie from 1939 at the Sphere in Las Vegas, as a collaborative project between Magnopus, Google DeepMind, Google Cloud, Warner Bros, and Sphere Studios.
+    </td>
+  </tr>
+  <tr style="border: none;">
+    <td colspan="2" style="border: none; padding-left: 20px; vertical-align: top;">
+      <strong>LoRA Training and AI Pipeline setup:</strong> Set up end-to-end pipelines to train LoRAs for T2I, I2I, I2V workflows for Wan2.1 VACE using proprietary image and video data.
+    </td>
+  </tr>
+  <tr style="border: none;">
+    <td colspan="2" style="border: none; padding-left: 20px; padding-bottom: 15px; vertical-align: top;"> <!-- Bottom padding for separation -->
+      <strong>Video Generation using Diffusion Models:</strong> Fine-tuning and optimizing models like Wan2.1 VACE, Hunyuan-DiT, Flux etc., to create new visual generations through tools like PyTorch and ComfyUI.
+    </td>
+  </tr>
+
   <!-- USC Institute for Creative Technologies -->
   <tr style="border: none;">
     <!-- Left Cell: Company & Position -->
