@@ -9,7 +9,7 @@ redirect_from:
 
 <!-- # About Me -->
 
-I am a Master of Science student in Computer Science (Artificial Intelligence) at the University of Southern California (USC). My interests lie primarily in deep learning and generative AI (LLMs, Diffusion Models), focusing on applications in areas like 3D Generation, Generative Media, Computer Vision, and Efficiency Optimization. Previously, I obtained my Bachelor of Technology in Computer Science (AI) from NMIMS University (Mumbai, India).
+I am a Master of Science student in Computer Science (Artificial Intelligence) at the University of Southern California (USC). My interests lie primarily in Deep Learning and Generative AI, focusing on areas like 3D Generation, Generative Media, Computer Vision, and Efficiency Optimization. Previously, I obtained my Bachelor of Technology in Computer Science (AI) from NMIMS University (Mumbai, India).
 
 I am honored to be currently associated with [Prof. Benjamin Nye](https://sites.google.com/site/benjaminnye/) at the [Learning Sciences Lab](https://ict.usc.edu/research/labs-groups/learning-sciences/) of [USC ICT](https://ict.usc.edu/) and [Prof. Mark Bolas](https://www.markbolas.com/) at the [USC School of Cinematic Arts](https://cinema.usc.edu/interactive/index.cfm).
 
