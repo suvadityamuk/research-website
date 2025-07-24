@@ -1,0 +1,16 @@
+files/ffmpeg-blog/mp4/four_grid_concat.mp4 filter=lfs diff=lfs merge=lfs -text
+files/ffmpeg-blog/mp4/gaussian_blur.mp4 filter=lfs diff=lfs merge=lfs -text
+files/ffmpeg-blog/mp4/horizontal_concat.mp4 filter=lfs diff=lfs merge=lfs -text
+files/ffmpeg-blog/mp4/temporal_concat.mp4 filter=lfs diff=lfs merge=lfs -text
+files/ffmpeg-blog/mp4/trim_video_frames.mp4 filter=lfs diff=lfs merge=lfs -text
+files/ffmpeg-blog/mp4/trim_video.mp4 filter=lfs diff=lfs merge=lfs -text
+files/ffmpeg-blog/mp4/downscale.mp4 filter=lfs diff=lfs merge=lfs -text
+files/ffmpeg-blog/mp4/ffmpeg_video_no_copyright.mp4 filter=lfs diff=lfs merge=lfs -text
+files/ffmpeg-blog/webm/temporal_concat.webm filter=lfs diff=lfs merge=lfs -text
+files/ffmpeg-blog/webm/trim_video_frames.webm filter=lfs diff=lfs merge=lfs -text
+files/ffmpeg-blog/webm/trim_video.webm filter=lfs diff=lfs merge=lfs -text
+files/ffmpeg-blog/webm/downscale.webm filter=lfs diff=lfs merge=lfs -text
+files/ffmpeg-blog/webm/ffmpeg_video_no_copyright.webm filter=lfs diff=lfs merge=lfs -text
+files/ffmpeg-blog/webm/four_grid_concat.webm filter=lfs diff=lfs merge=lfs -text
+files/ffmpeg-blog/webm/gaussian_blur.webm filter=lfs diff=lfs merge=lfs -text
+files/ffmpeg-blog/webm/horizontal_concat.webm filter=lfs diff=lfs merge=lfs -text
