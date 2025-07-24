@@ -49,7 +49,7 @@ redirect_from:
     <!-- Left Cell: Company & Position -->
     <td style="border: none; vertical-align: top; padding-bottom: 5px;">
       <strong>Magnopus LLC</strong><br>
-      Engineer I, R&D (Strike Team) (Full-time, Internship)
+      Engineer I, R&D (Strike Team) (Full-time)
     </td>
     <!-- Right Cell: Date & Location -->
     <td style="border: none; text-align: right; vertical-align: top; padding-bottom: 5px;">
