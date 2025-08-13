@@ -1,11 +1,9 @@
 ---
 title: 'PyImageSearch'
 date: 2024-06-03
-permalink: /posts/2024/06/pyimagesearch/
+permalink: /posts/2024/06/pyimagesearch
 tags:
   - cool posts
-  - category1
-  - category2
 ---
 
 A set of blogs I wrote for PyImageSearch, a reputed Computer-Vision and Deep-Learning educational technology company.
