@@ -11,6 +11,8 @@ redirect_from:
 
 I am a Master of Science student in Computer Science (Artificial Intelligence) at the University of Southern California (USC). My interests lie primarily in Deep Learning and Generative AI, focusing on areas like 3D Generation, Generative Media, Computer Vision, and Efficiency Optimization. Previously, I obtained my Bachelor of Technology in Computer Science (AI) from NMIMS University (Mumbai, India).
 
+I currently work as a Machine Learning Engineer at [Magnopus](https://www.magnopus.com/), where I am involved in efforts for optimizing 3D Generative models and exploring the use of AI for rapidly creating 3D worlds in [Oko](https://www.oko.live/).
+
 I am honored to be currently associated with [Prof. Benjamin Nye](https://sites.google.com/site/benjaminnye/) at the [Learning Sciences Lab](https://ict.usc.edu/research/labs-groups/learning-sciences/) of [USC ICT](https://ict.usc.edu/) and [Prof. Mark Bolas](https://www.markbolas.com/) at the [USC School of Cinematic Arts](https://cinema.usc.edu/interactive/index.cfm).
 
 ## Education
