@@ -49,11 +49,12 @@ redirect_from:
     <!-- Left Cell: Company & Position -->
     <td style="border: none; vertical-align: top; padding-bottom: 5px;">
       <strong>Magnopus LLC</strong><br>
-      Engineer I, R&D (Strike Team) (Full-time)
+      Current: Engineer I, R&D Engineering (Part-time)<br>
+      Prev: Engineer I, R&D (Strike Team) (Full-time)
     </td>
     <!-- Right Cell: Date & Location -->
     <td style="border: none; text-align: right; vertical-align: top; padding-bottom: 5px;">
-      <em style="font-weight: bold;">June 2025 - August 2025</em><br>
+      <em style="font-weight: bold;">June 2025 - Present</em><br>
       <em style="font-style: italic;">Los Angeles, CA, USA</em>
     </td>
   </tr>
