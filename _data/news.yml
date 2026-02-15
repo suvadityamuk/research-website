@@ -12,8 +12,12 @@
 #   • Entries with emoji — use Unicode emoji directly (e.g. 🎉)
 #   • Entries combining links + emoji
 
-- sort_date: 2026-12-04
-  date: "Dec 2026"
+- sort_date: 2026-01-28
+  date: "Jan 2026"
+  text: "⌨️ Contributed SAM-3D-Objects and TRELLIS.2-4B to [3D-Arena](https://huggingface.co/spaces/3d-arena/3d-arena) on Hugging Face!"
+
+- sort_date: 2025-12-04
+  date: "Dec 2025"
   text: "🤖 Created the [demo for GuideFlow3D](https://huggingface.co/spaces/suvadityamuk/GuideFlow3D) presented at NeurIPS 2025 on [Hugging Face Spaces](https://huggingface.co/spaces)!"
 
 - sort_date: 2025-12-19
