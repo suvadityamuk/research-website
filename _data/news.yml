@@ -1,0 +1,41 @@
+# News items displayed on the front page.
+# Only the 5 most recent entries (by sort_date) are shown.
+#
+# Fields:
+#   sort_date  — YYYY-MM-DD used for chronological sorting (required)
+#   date       — Display date string shown to visitors (required)
+#   text       — Description (supports Markdown links and emoji) (required)
+#
+# Examples below show the kinds of entries you can add:
+#   • Plain text announcements
+#   • Entries with Markdown links — [link text](url)
+#   • Entries with emoji — use Unicode emoji directly (e.g. 🎉)
+#   • Entries combining links + emoji
+
+- sort_date: 2026-12-04
+  date: "Dec 2026"
+  text: "🤖 Created the [demo for GuideFlow3D](https://huggingface.co/spaces/suvadityamuk/GuideFlow3D) presented at NeurIPS 2025 on [Hugging Face Spaces](https://huggingface.co/spaces)!"
+
+- sort_date: 2025-12-19
+  date: "Dec 2025"
+  text: "🪄 Released [Conjure](https://github.com/suvadityamuk/conjure), a Blender Plugin for 3D Generation within the Blender console itself (a weekend project)!"
+
+- sort_date: 2025-12-04
+  date: "Dec 2025"
+  text: "📰 Was featured in news articles by [USC Viterbi](https://viterbischool.usc.edu/news/2025/12/finding-home-in-oz-usc-student-helps-transform-a-classic-with-ai/), [The Global Indian](https://www.globalindian.com/youth/story/cover-story/how-suvaditya-mukherjee-an-indian-student-in-the-us-helped-reimagine-a-hollywood-classic-using-ai), and [New India Abroad](https://www.newindiaabroad.com/english/technology/usc-student-suvaditya-reimagines-the-wizard-of-oz-with-ai)!"
+
+- sort_date: 2025-10-31
+  date: "Oct 2025"
+  text: "🎤 Presented on [Gemini and Vertex AI](https://x.com/halcyonrayes/status/1984263099256345004) at the [University of Maryland, College Park](https://www.umd.edu)!"
+
+- sort_date: 2025-10-23
+  date: "Sep 2025"
+  text: "🪧 Presented my [poster on the state of 3D Generation within the PyTorch ecosystem](https://x.com/halcyonrayes/status/1981459538487476501?s=20) at the [PyTorch Conference 2025](https://pytorch.org/conf/2025)!"
+
+- sort_date: 2025-08-02
+  date: "Aug 2025"
+  text: "🎤 Presented on [Building with Gemini CLI](https://x.com/halcyonrayes/status/1971365407635456388?s=20) at DevFest Boston 2025!"
+
+- sort_date: 2025-06-10
+  date: "Jun 2025"
+  text: "🤝 Joined [Magnopus](https://www.magnopus.com/) as a Machine Learning Engineer."

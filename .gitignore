@@ -15,5 +15,12 @@ package-lock.json
 # Ignore python virtual environment
 .venv/
 
+# Ignore files created by macOS
+.DS_Store
+
+# Ignore bundle files
+.bundle/
+vendor/
+
 files/.DS_Store
 files/ffmpeg-blog/.DS_Store

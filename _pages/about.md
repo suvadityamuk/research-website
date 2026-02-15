@@ -15,6 +15,15 @@ I currently work as a Machine Learning Engineer at [Magnopus](https://www.magnop
 
 I am honored to be currently associated with [Prof. Benjamin Nye](https://sites.google.com/site/benjaminnye/) at the [Learning Sciences Lab](https://ict.usc.edu/research/labs-groups/learning-sciences/) of [USC ICT](https://ict.usc.edu/) and [Prof. Mark Bolas](https://www.markbolas.com/) at the [USC School of Cinematic Arts](https://cinema.usc.edu/interactive/index.cfm).
 
+## News
+
+{% assign sorted_news = site.data.news | sort: "sort_date" | reverse %}
+<ul style="font-size: 0.98em; list-style-type: disc; padding-left: 1.5em;">
+{% for item in sorted_news limit:5 %}
+  <li style="margin-bottom: 0.5em;">{{ item.date }} — {{ item.text | markdownify | remove: '<p>' | remove: '</p>' }}</li>
+{% endfor %}
+</ul>
+
 ## Education
 
 <table style="border: none; font-size: 1.04em;">
