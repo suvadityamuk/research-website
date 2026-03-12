@@ -44,8 +44,6 @@
   description: "Several implementations and optimizations of Neural Radiance Fields (NeRF) using PyTorch, testing different training configurations, optimization techniques, and quantization approaches."
   code_url: "https://github.com/suvadityamuk/NeRF-Experiments"
   code_label: "GitHub"
-  demo_url: "https://github.com/suvadityamuk/NeRF-Experiments"
-  demo_label: "GitHub"
 
 - title: "Landscape of 3D Generation - PyTorch Conference 2025"
   description: "A demo on optimizing 3D Generation pipelines for microsoft/TRELLIS with quantizations using torchao."
@@ -58,5 +56,3 @@
   description: "A hackathon project app that involves a UGC economy for indie game devs through a constant paginated feed for mini-games."
   code_url: "https://github.com/suvadityamuk/Gameloop"
   code_label: "GitHub"
-  demo_url: "https://github.com/suvadityamuk/Gameloop"
-  demo_label: "GitHub"
