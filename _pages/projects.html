@@ -1,0 +1,85 @@
+---
+layout: archive
+title: "Projects"
+permalink: /projects/
+author_profile: true
+---
+
+<p>A showcase of some smaller projects I've built. Each card links to the source code and a live demo or video where available.</p>
+
+<style>
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5em;
+  margin-top: 1.5em;
+}
+
+@media (max-width: 768px) {
+  .projects-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.project-card {
+  border: 1px solid var(--global-border-color);
+  border-radius: 4px;
+  padding: 1.25em 1.5em;
+  transition: box-shadow 0.2s ease-in-out;
+}
+
+.project-card:hover {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+}
+
+.project-card h3 {
+  margin: 0 0 0.35em;
+  font-size: 1.15em;
+}
+
+.project-card p {
+  margin: 0 0 0.75em;
+  font-size: 0.9em;
+  color: var(--global-text-color-light);
+  line-height: 1.45;
+}
+
+.project-card .project-links {
+  display: flex;
+  gap: 0.75em;
+  flex-wrap: wrap;
+}
+
+.project-card .project-links a {
+  font-size: 0.85em;
+  text-decoration: none;
+  color: var(--global-link-color);
+  border: 1px solid var(--global-link-color);
+  border-radius: 3px;
+  padding: 0.3em 0.65em;
+  transition: background-color 0.2s, color 0.2s;
+}
+
+.project-card .project-links a:hover {
+  background-color: var(--global-link-color);
+  color: #fff;
+  text-decoration: none;
+}
+</style>
+
+<div class="projects-grid">
+  {% for project in site.data.projects %}
+  <div class="project-card">
+    <h3>{{ project.title }}</h3>
+    <p>{{ project.description }}</p>
+    <div class="project-links">
+      {% if project.code_url %}
+        <a href="{{ project.code_url }}" target="_blank" rel="noopener">{{ project.code_label | default: "Code" }}</a>
+      {% endif %}
+      {% if project.demo_url %}
+        <a href="{{ project.demo_url }}" target="_blank" rel="noopener">{{ project.demo_label | default: "Demo" }}</a>
+      {% endif %}
+    </div>
+  </div>
+  {% endfor %}
+</div>
