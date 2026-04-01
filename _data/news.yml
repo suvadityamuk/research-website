@@ -12,6 +12,14 @@
 #   • Entries with emoji — use Unicode emoji directly (e.g. 🎉)
 #   • Entries combining links + emoji
 
+- sort_date: 2026-03-31
+  date: "Mar 2026"
+  text: "👁️ Released [Eye](https://eye.suvadityamuk.com/), a web-based 3D Object Viewer that is completely local to your machine with many exciting features!"
+
+- sort_date: 2026-03-21
+  date: "Mar 2026"
+  text: "🎤 Spoke at Google Developer Group Edmonton's Build with AI event on [Multi-Agent Systems](https://docs.google.com/presentation/d/14zr3Azlj1RinxsoT7MSzITGs7vP-V5WJMNstzpYoCL4)!"
+
 - sort_date: 2026-02-24
   date: "Feb 2026"
   text: "🤖 Contributed [Meshy-6](https://meshy.ai) to [3D-Arena](https://huggingface.co/spaces/3d-arena/3d-arena) on Hugging Face!"
