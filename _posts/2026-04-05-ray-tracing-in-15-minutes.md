@@ -21,7 +21,7 @@ This is implemented with PyTorch, and can be similarly implemented in NumPy or o
 
 > All diagrams/figures in this blog/notebook are made with [Nano Banana 2](https://aistudio.google.com) (except our ray-traced image, of course!)
 
-<img src='../images/ray-tracing/overview_diagram.png' alt='Overview diagram of the ray tracing pipeline'>
+<img src='/images/ray-tracing/overview_diagram.png' alt='Overview diagram of the ray tracing pipeline'>
 
 (created by [Suvaditya Mukherjee](https://suvadityamuk.com))
 
@@ -67,7 +67,7 @@ We set up the following things
 
 (figure not to scale)
 
-<img src='../images/ray-tracing/scene_setup.png' alt='Scene setup diagram showing camera, sphere, and light'>
+<img src='/images/ray-tracing/scene_setup.png' alt='Scene setup diagram showing camera, sphere, and light'>
 
 ```python
 
@@ -98,7 +98,7 @@ specular_component = 0.6
 
 Here, we're gonna create a quick way to reference/index our camera plane, but we do so by creating a `torch.meshgrid` that yields lists of numbers that we can use to index specific pixel points and/or full rows or columns or their combinations easily.
 
-<img src='../images/ray-tracing/step2_meshgrid.png' alt='Meshgrid diagram for pixel indexing'>
+<img src='/images/ray-tracing/step2_meshgrid.png' alt='Meshgrid diagram for pixel indexing'>
 
 ```python
 
@@ -134,7 +134,7 @@ To sum up, our operations below will first take the pixel coordinates to get thr
 
 Now, our coordinates are in the normalized screen plane (or put simply, defined with respect to our camera screen origin instead of the world origin) and are ready to be used for operation in the device screen space itself.
 
-<img src='../images/ray-tracing/step3_coord_mapping.png' alt='Pixel to normalized screen coordinate transformation'>
+<img src='/images/ray-tracing/step3_coord_mapping.png' alt='Pixel to normalized screen coordinate transformation'>
 
 ```python
 
@@ -151,7 +151,7 @@ To do so, we make use of the field-of-view angle and use it to determine how muc
 
 We also scale our X-axis by the aspect ratio to make sure that it remains proportional to the Y-axis according to our frame dimensions.
 
-<img src='../images/ray-tracing/step4_near_plane.png' alt='Near plane setup with field of view'>
+<img src='/images/ray-tracing/step4_near_plane.png' alt='Near plane setup with field of view'>
 
 ```python
 
@@ -170,7 +170,7 @@ Once defined, we will also normalize this to get an unit vector that points in t
 
 We use -1 in the Z-axis because we say that the near plane of the camera is located at -1 distance from the camera, i.e. 1 unit in the -Z direction. We assume that our camera is looking along the negative Z-direction.
 
-<img src='../images/ray-tracing/step5_ray_direction.png' alt='Ray direction from camera through image plane'>
+<img src='/images/ray-tracing/step5_ray_direction.png' alt='Ray direction from camera through image plane'>
 
 ```python
 
@@ -198,7 +198,7 @@ $(d⋅d)t^2+2(d⋅m)t+(m⋅m−R^2)=0$
 
 where $m = o - c$
 
-<img src='../images/ray-tracing/step6_ray_sphere.png' alt='Ray-sphere intersection geometry'>
+<img src='/images/ray-tracing/step6_ray_sphere.png' alt='Ray-sphere intersection geometry'>
 
 ```python
 
@@ -246,7 +246,7 @@ We use the roots we get to understand which rays did hit the sphere and which di
 
 Based on this, we can now also define vectors that give us the normal (90°) direction of the spherical surface at a given point (something we're going to need soon enough). To do so, we take a vector from the sphere center to the intersection point. Lastly, we normalize it to make sure we only represent a direction with unit magnitude.
 
-<img src='../images/ray-tracing/step8_intersection.png' alt='Intersection point and surface normal vectors'>
+<img src='/images/ray-tracing/step8_intersection.png' alt='Intersection point and surface normal vectors'>
 
 ```python
 
@@ -274,7 +274,7 @@ It defines 3 color components, which are
 
 - Specular Component: These are bright highlights that appear on an object that makes them appear shiny. They appear at specific spots where the reflected rays coming from the light appear directly in the same direction as that of the viewer, which are then amplified/raised by a power to determine how "shiny" a material/object is.
 
-<img src='../images/ray-tracing/step9_phong_shading.png' alt='Phong shading components: ambient, diffuse, specular'>
+<img src='/images/ray-tracing/step9_phong_shading.png' alt='Phong shading components: ambient, diffuse, specular'>
 
 
 ```python
