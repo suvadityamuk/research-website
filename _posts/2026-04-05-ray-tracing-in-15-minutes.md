@@ -19,6 +19,8 @@ In this notebook, I'm going to try and explain how you can go from zero to a bas
 
 This is implemented with PyTorch, and can be similarly implemented in NumPy or other simpler numerical computing platforms with the same principles in place.
 
+> All diagrams/figures in this blog/notebook are made with [Nano Banana 2](https://aistudio.google.com) (except our ray-traced image, of course!)
+
 <img src='../images/ray-tracing/overview_diagram.png' alt='Overview diagram of the ray tracing pipeline'>
 
 (created by [Suvaditya Mukherjee](https://suvadityamuk.com))
