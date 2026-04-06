@@ -9,6 +9,8 @@ tags:
   - pytorch
 ---
 
+A tiny implementation of ray tracing from scratch using PyTorch.
+
 # Ray Tracing in 15 minutes
 
 Ray Tracing is one of the most interesting Computer Graphics algorithms out there, used in [tons of games](https://www.corsair.com/us/en/explorer/gamer/gaming-pcs/what-is-ray-tracing-in-games/) as a default now. It was, for a long time, considered to be too slow compared to traditional methods like [rasterization](https://blogs.nvidia.com/blog/whats-difference-between-ray-tracing-rasterization/) and [scanline rendering](https://hackaday.io/project/11815-quicksilver-neo-open-source-gpu/log/38395-chasing-the-scanline). But with the advent of Graphics Processing Units (GPUs) and tensor programming, it became accessible to millions of developers.
