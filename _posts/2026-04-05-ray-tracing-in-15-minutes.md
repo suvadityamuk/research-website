@@ -21,6 +21,8 @@ This is implemented with PyTorch, and can be similarly implemented in NumPy or o
 
 > All diagrams/figures in this blog/notebook are made with [Nano Banana 2](https://aistudio.google.com) (except our ray-traced image, of course!)
 
+> Use this [Colab notebook](https://colab.research.google.com/drive/1BcDNndy7wgRxqkQF5XTxVGVVt3RX4MA4#scrollTo=kDzBTCe_WIXS) to follow along!
+
 <img src='/images/ray-tracing/overview_diagram.png' alt='Overview diagram of the ray tracing pipeline'>
 
 (created by [Suvaditya Mukherjee](https://suvadityamuk.com))
