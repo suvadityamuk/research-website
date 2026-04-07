@@ -61,6 +61,11 @@ redirect_from:
   <!-- Description Rows -->
   <tr style="border: none;">
     <td colspan="2" style="border: none; padding-left: 20px; vertical-align: top;">
+      <strong>Multi-agent workforce orchestration:</strong> Build ADK-based agentic deliberation systems with over 40 tool-integrated, function calling agents working together backed by a vector database to generate artifacts for several projects based on defined policies.
+    </td>
+  </tr>
+  <tr style="border: none;">
+    <td colspan="2" style="border: none; padding-left: 20px; vertical-align: top;">
       <strong>The Wizard of Oz - Sphere:</strong> Helping solve broad-scale AI performance issues related to the project of releasing the original Wizard of Oz movie from 1939 at the Sphere in Las Vegas, as a collaborative project between Magnopus, Google DeepMind, Google Cloud, Warner Bros, and Sphere Studios.
     </td>
   </tr>

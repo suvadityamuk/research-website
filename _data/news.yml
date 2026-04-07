@@ -12,6 +12,10 @@
 #   • Entries with emoji — use Unicode emoji directly (e.g. 🎉)
 #   • Entries combining links + emoji
 
+- sort_date: 2026-04-05
+  date: "Apr 2026"
+  text: "☀️ I wrote a blog post on [Ray Tracing in 15 minutes](https://suvadityamuk.com/ray-tracing-in-15-minutes/)!"
+
 - sort_date: 2026-03-31
   date: "Mar 2026"
   text: "👁️ Released [Eye](https://eye.suvadityamuk.com/), a web-based 3D Object Viewer that is completely local to your machine with many exciting features!"
