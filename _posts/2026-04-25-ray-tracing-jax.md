@@ -1,29 +1,32 @@
 ---
-title: 'Ray Tracing in 15 Minutes'
-date: 2026-04-05
-permalink: /posts/2026/04/ray-tracing-in-15-minutes/
+title: 'Ray Tracing in 15 Minutes (JAX Edition)'
+date: 2026-04-25
+permalink: /posts/2026/04/ray-tracing-in-15-minutes-jax/
 tags:
   - ray tracing
   - computer graphics
   - computer vision
-  - pytorch
+  - jax
+  - tpu
 ---
 
-A tiny implementation of ray tracing from scratch using PyTorch.
+A JAX port of the ray tracing notebook, designed to run on TPUs (and GPUs/CPUs).
 
-# Ray Tracing in 15 minutes
+# Ray Tracing in 15 minutes (JAX Edition)
 
-Ray Tracing is one of the most interesting Computer Graphics algorithms out there, used in [tons of games](https://www.corsair.com/us/en/explorer/gamer/gaming-pcs/what-is-ray-tracing-in-games/) as a default now. It was, for a long time, considered to be too slow compared to traditional methods like [rasterization](https://blogs.nvidia.com/blog/whats-difference-between-ray-tracing-rasterization/) and [scanline rendering](https://hackaday.io/project/11815-quicksilver-neo-open-source-gpu/log/38395-chasing-the-scanline). But with the advent of Graphics Processing Units (GPUs) and tensor programming, it became accessible to millions of developers.
+This is a JAX port of the [PyTorch Ray Tracing notebook](/posts/2026/04/ray-tracing-in-15-minutes/), designed to run on TPUs (and GPUs/CPUs).
+
+Ray Tracing is one of the most interesting Computer Graphics algorithms out there, used in [tons of games](https://www.corsair.com/us/en/explorer/gamer/gaming-pcs/what-is-ray-tracing-in-games/) as a default now. It was, for a long time, considered to be too slow compared to traditional methods like [rasterization](https://blogs.nvidia.com/blog/whats-difference-between-ray-tracing-rasterization/) and [scanline rendering](https://hackaday.io/project/11815-quicksilver-neo-open-source-gpu/log/38395-chasing-the-scanline). But with the advent of Graphics Processing Units (GPUs), Tensor Processing Units (TPUs) and tensor programming, it became accessible to millions of developers.
 
 
-In this notebook, I'm going to try and explain how you can go from zero to a basic understanding of what's going on under the hood. This is only meant to be an *introduction* and does not cover next steps like Reflections, Shadows etc. (yet), but it does cover integral topics like Phong Shading. It is also mostly light on math, but will play on giving you an intuition. The diagrams included should help build that intuition, but are meant more so to allow you to see everything happening at once as a snapshot (which is why they may look more complex than usual).
+In this notebook, we implement a basic ray tracer with Phong shading using JAX primitives. JAX's functional approach means we use `jnp.where` for conditional assignments instead of in-place masked indexing. It is also mostly light on math, but will play on giving you an intuition. The diagrams included should help build that intuition, but are meant more so to allow you to see everything happening at once as a snapshot (which is why they may look more complex than usual).
 
 
-This is implemented with PyTorch, and can be similarly implemented in NumPy or other simpler numerical computing platforms with the same principles in place.
+This is implemented with JAX, and can be similarly implemented in PyTorch, NumPy, or other numerical computing platforms with the same principles in place.
 
 > All diagrams/figures in this blog/notebook are made with [Nano Banana 2](https://aistudio.google.com) (except our ray-traced image, of course!)
 
-> Use this [Colab notebook](https://colab.research.google.com/drive/1BcDNndy7wgRxqkQF5XTxVGVVt3RX4MA4#scrollTo=kDzBTCe_WIXS) to follow along!
+> Use this [Colab notebook](https://colab.research.google.com/drive/1TbFOKrHXVibScVOVYR1yQKZh9Ve3sxlM?usp=sharing) to follow along!
 
 <img src='/images/ray-tracing/overview_diagram.png' alt='Overview diagram of the ray tracing pipeline'>
 
@@ -31,29 +34,23 @@ This is implemented with PyTorch, and can be similarly implemented in NumPy or o
 
 # Step 1 - Initialize the current world with light, camera, and object
 
-## Imports and PyTorch setup
+## Imports and JAX setup
 
-We quickly set up the accelerator of choice. This notebook should run fine on a NVIDIA T4 provided for free on Colab.
+JAX automatically detects and uses TPU/GPU/CPU backends. On a TPU VM or Colab with TPU runtime, JAX will use the TPU by default.
 
 ```python
 
 import math
-import torch
-from torch import nn
+import jax
+import jax.numpy as jnp
 import matplotlib.pyplot as plt
 from PIL import Image
+import numpy as np
 
-def get_device():
-    if torch.cuda.is_available():
-        device = torch.device('cuda')
-    elif torch.backends.mps.is_available():
-        device = torch.device('mps')
-    else:
-        device = torch.device('cpu')
-    print(f"Using device: {device}")
-    return device
-
-device = get_device()
+# JAX automatically selects the best available backend (TPU > GPU > CPU)
+backend = jax.devices()[0].platform
+print(f"Using JAX backend: {backend}")
+print(f"Available devices: {jax.devices()}")
 
 ```
 
@@ -80,15 +77,15 @@ frame_width = 512
 fov = math.radians(60)
 
 # Try playing around with this by moving it along -z axis!
-camera_loc = torch.tensor([0.0, 0.0, -1.0], device=device)
+camera_loc = jnp.array([0.0, 0.0, -1.0])
 
-sphere_loc = torch.tensor([0.0, 0.0, -4.0], device=device)
-sphere_color = torch.tensor([0.0, 1.0, 0.0], device=device)
+sphere_loc = jnp.array([0.0, 0.0, -4.0])
+sphere_color = jnp.array([0.0, 1.0, 0.0])
 sphere_radius = 1.0
 
-light_dir = torch.tensor([1.0, 1.0, -1.0], device=device)
-light_dir = light_dir / torch.norm(light_dir)
-light_color = torch.tensor([1.0, 1.0, 1.0], device=device)
+light_dir = jnp.array([1.0, 1.0, -1.0])
+light_dir = light_dir / jnp.linalg.norm(light_dir)
+light_color = jnp.array([1.0, 1.0, 1.0])
 
 specular_exponent = 5.0
 
@@ -100,19 +97,17 @@ specular_component = 0.6
 
 # Step 2 - Generate one ray per pixel
 
-Here, we're gonna create a quick way to reference/index our camera plane, but we do so by creating a `torch.meshgrid` that yields lists of numbers that we can use to index specific pixel points and/or full rows or columns or their combinations easily.
+Here, we create a `jnp.meshgrid` that yields lists of numbers that we can use to index specific pixel points and/or full rows or columns easily. Unlike PyTorch, we specify `dtype=jnp.float32` directly at creation time instead of moving tensors to a device afterward - JAX dispatches to the available accelerator automatically!
 
 <img src='/images/ray-tracing/step2_meshgrid.png' alt='Meshgrid diagram for pixel indexing'>
 
 ```python
 
-xs, ys = torch.meshgrid(
-    torch.arange(frame_width),
-    torch.arange(frame_height),
+xs, ys = jnp.meshgrid(
+    jnp.arange(frame_width, dtype=jnp.float32),
+    jnp.arange(frame_height, dtype=jnp.float32),
     indexing="xy",
 )
-xs = xs.to(device)
-ys = ys.to(device)
 
 ```
 
@@ -178,13 +173,13 @@ We use -1 in the Z-axis because we say that the near plane of the camera is loca
 
 ```python
 
-ray_dirs = torch.stack([
+ray_dirs = jnp.stack([
     x_camera_plane,
     y_camera_plane,
-    -torch.ones_like(x_camera_plane)
-], dim=-1)
+    -jnp.ones_like(x_camera_plane)
+], axis=-1)
 
-ray_dirs = ray_dirs / torch.norm(ray_dirs, dim=-1, keepdim=True)
+ray_dirs = ray_dirs / jnp.linalg.norm(ray_dirs, axis=-1, keepdims=True)
 
 ```
 
@@ -208,8 +203,8 @@ where $m = o - c$
 
 origin_sphere_center_vec = camera_loc - sphere_loc
 
-b = 2.0 * torch.sum(ray_dirs * origin_sphere_center_vec, dim=-1)
-c = torch.sum(origin_sphere_center_vec * origin_sphere_center_vec, dim=-1) - sphere_radius ** 2
+b = 2.0 * jnp.sum(ray_dirs * origin_sphere_center_vec, axis=-1)
+c = jnp.sum(origin_sphere_center_vec * origin_sphere_center_vec, axis=-1) - sphere_radius ** 2
 
 discriminant = b ** 2 - 4.0 * c
 
@@ -237,7 +232,7 @@ When there are multiple objects, we must check each object to see whether the ra
 
 ```python
 
-sqrt_discriminant = torch.sqrt(torch.clamp(discriminant, min=0.0))
+sqrt_discriminant = jnp.sqrt(jnp.clip(discriminant, a_min=0.0))
 
 t0 = (-b - sqrt_discriminant) / 2.0
 t1 = (-b + sqrt_discriminant) / 2.0
@@ -254,13 +249,13 @@ Based on this, we can now also define vectors that give us the normal (90°) dir
 
 ```python
 
-t = torch.where(t0 > 0, t0, t1)
+t = jnp.where(t0 > 0, t0, t1)
 hit_mask = hit_mask & (t > 0)
 
 intersection_points = camera_loc + ray_dirs * t[..., None]
 
-surface_normal_vecs = (intersection_points - sphere_loc)
-surface_normal_vecs = surface_normal_vecs / torch.norm(surface_normal_vecs, dim=-1, keepdim=True)
+surface_normal_vecs = intersection_points - sphere_loc
+surface_normal_vecs = surface_normal_vecs / jnp.linalg.norm(surface_normal_vecs, axis=-1, keepdims=True)
 
 ```
 
@@ -283,10 +278,10 @@ It defines 3 color components, which are
 
 ```python
 
-diffuse = torch.clamp(torch.sum(surface_normal_vecs * (-light_dir), dim=-1), min=0.0)
+diffuse = jnp.clip(jnp.sum(surface_normal_vecs * (-light_dir), axis=-1), a_min=0.0)
 
-reflected = 2.0 * torch.sum(surface_normal_vecs * (-light_dir), dim=-1)[..., None] * surface_normal_vecs - (-light_dir)
-specular = torch.clamp(torch.sum(reflected * -(ray_dirs), dim=-1), min=0.0) ** specular_exponent
+reflected = 2.0 * jnp.sum(surface_normal_vecs * (-light_dir), axis=-1)[..., None] * surface_normal_vecs - (-light_dir)
+specular = jnp.clip(jnp.sum(reflected * -(ray_dirs), axis=-1), a_min=0.0) ** specular_exponent
 
 ```
 
@@ -302,38 +297,31 @@ shading = ambient_component + diffuse * diffuse_component
 
 There we go! We have our shading ops ready, and now we're going to apply it to get the final image.
 
+**Note:** Unlike PyTorch, JAX arrays are immutable — we cannot do in-place masked assignment like `image[hit_mask] = ...`. Instead, we use `jnp.where` to conditionally blend the sphere color and background.
+
 ```python
 
-# If you want to render a black background, use this
-
-# image = torch.zeros((frame_height, frame_width, 3), device=device)
-
-# If you want to render a background with a specific color with the
-# same R=G=B values, use this
-
-# image = torch.full((frame_height, frame_width, 3), 1.0, device=device)
-
-# If you want to mix and match R,G,B values to get a specific background
-# color, use this (where R/255.0, G/255.0, B/255.0)
+# Background color (R, G, B)
 bg_r_color = 0.0
 bg_g_color = 0.0
 bg_b_color = 0.0
 
-bg_r = torch.full((frame_height, frame_width), bg_r_color, device=device)
-bg_g = torch.full((frame_height, frame_width), bg_g_color, device=device)
-bg_b = torch.full((frame_height, frame_width), bg_b_color, device=device)
+bg = jnp.array([bg_r_color, bg_g_color, bg_b_color])
+background = jnp.broadcast_to(bg, (frame_height, frame_width, 3))
 
-image = torch.stack([bg_r, bg_g, bg_b], dim=-1)
+# Compute sphere pixel colors: object color * shading + light color * specular
+sphere_pixel_color = sphere_color * shading[..., None] + light_color * specular[..., None]
 
-image[hit_mask] = sphere_color * shading[hit_mask][..., None]
-image[hit_mask] += light_color * specular[hit_mask][..., None]
+# Use jnp.where to select between sphere color and background
+# hit_mask is (H, W), expand to (H, W, 1) for broadcasting with (H, W, 3)
+image = jnp.where(hit_mask[..., None], sphere_pixel_color, background)
 
-image = torch.clamp(image, min=0.0, max=1.0)
-image = (image * 255).byte().cpu().numpy()
+image = jnp.clip(image, a_min=0.0, a_max=1.0)
+image_np = np.array((image * 255).astype(jnp.uint8))
 
-final_image = Image.fromarray(image)
-final_image.save("raytrace_sphere.png")
-print("Saved image - raytrace_sphere.png")
+final_image = Image.fromarray(image_np)
+final_image.save("raytrace_sphere_jax.png")
+print("Saved image - raytrace_sphere_jax.png")
 
 ```
 
@@ -341,7 +329,7 @@ print("Saved image - raytrace_sphere.png")
 
 ```python
 
-plt.imshow(image)
+plt.imshow(image_np)
 plt.axis('off')
 plt.show()
 
@@ -351,14 +339,20 @@ plt.show()
 
 # Conclusion
 
-In this example, we looked at how we can define a sample environment and then go from a basic setup all the way to generating an image of a sphere with Ray-Tracing and Phong shading.
+In this JAX port, we've replicated the PyTorch ray tracer using JAX primitives (`jax.numpy`). Key differences from the PyTorch version:
 
-To go further from here, I highly recommend trying to implement reflections (to do so, you must track the rays reflected off of objects), checking multiple objects (run the intersection check once every time on each object) and shadows (track vectors going from objects towards light sources and check if they intersect any objects)
+1. **No explicit device management** — JAX automatically dispatches to TPU/GPU/CPU
+2. **Immutable arrays** — Instead of `image[mask] = value`, we use `jnp.where(mask, value, default)`
+3. **`jnp.clip`** instead of `torch.clamp`
+4. **`jnp.linalg.norm`** instead of `torch.norm`
+5. **NumPy bridge** — We convert to NumPy via `np.array()` for PIL/matplotlib
+
+This notebook runs as-is on TPU, GPU, or CPU — JAX handles the backend selection automatically!
 
 Future resources:
 
 - [Ray Tracing in one weekend](https://raytracing.github.io/books/RayTracingInOneWeekend.html) - A much more grounded and neat resource (inspired me for the name!)
-- [What is Ray Tracing by NVIDIA](https://developer.nvidia.com/discover/ray-tracing) - Their hardware enabled it, so they know best!
+- [JAX documentation](https://jax.readthedocs.io/) - The official JAX docs
 
 Thank you for following along!
 

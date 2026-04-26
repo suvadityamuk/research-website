@@ -1,9 +1,16 @@
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-EDMQJWDYLW"></script>
+<!--
+  Google Analytics (GA4) — Global Site Tag (gtag.js)
+  ====================================================
+  To change the Measurement ID, update the single variable below.
+  Everything else is the standard GA4 snippet from Google.
+-->
+{% assign ga_id = "G-EDMQJWDYLW" %}
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id={{ ga_id }}"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
-
-  <!-- end custom analytics snippet -->
-  gtag('config', 'G-EDMQJWDYLW');
+  gtag('config', '{{ ga_id }}');
 </script>
