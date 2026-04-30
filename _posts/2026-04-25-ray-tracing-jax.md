@@ -2,6 +2,8 @@
 title: 'Ray Tracing in 15 Minutes (JAX Edition)'
 date: 2026-04-25
 permalink: /posts/2026/04/ray-tracing-in-15-minutes-jax/
+description: "A JAX port of the ray tracing notebook — ray-sphere intersection and Phong shading with jax.numpy, designed to run on TPUs, GPUs, and CPUs."
+mathjax: true
 tags:
   - ray tracing
   - computer graphics
@@ -12,7 +14,7 @@ tags:
 
 A JAX port of the ray tracing notebook, designed to run on TPUs (and GPUs/CPUs).
 
-# Ray Tracing in 15 minutes (JAX Edition)
+## Ray Tracing in 15 minutes (JAX Edition)
 
 This is a JAX port of the [PyTorch Ray Tracing notebook](/posts/2026/04/ray-tracing-in-15-minutes/), designed to run on TPUs (and GPUs/CPUs).
 
@@ -32,7 +34,7 @@ This is implemented with JAX, and can be similarly implemented in PyTorch, NumPy
 
 (created by [Suvaditya Mukherjee](https://suvadityamuk.com))
 
-# Step 1 - Initialize the current world with light, camera, and object
+## Step 1 - Initialize the current world with light, camera, and object
 
 ## Imports and JAX setup
 
@@ -95,7 +97,7 @@ specular_component = 0.6
 
 ```
 
-# Step 2 - Generate one ray per pixel
+## Step 2 - Generate one ray per pixel
 
 Here, we create a `jnp.meshgrid` that yields lists of numbers that we can use to index specific pixel points and/or full rows or columns easily. Unlike PyTorch, we specify `dtype=jnp.float32` directly at creation time instead of moving tensors to a device afterward - JAX dispatches to the available accelerator automatically!
 
@@ -111,7 +113,7 @@ xs, ys = jnp.meshgrid(
 
 ```
 
-# Step 3 - Map pixel coordinates to camera plane coordinates
+## Step 3 - Map pixel coordinates to camera plane coordinates
 
 In our "world", any given point can be expressed as a combination of 3 floating-point numbers, the X, Y, Z co-ordinates. These are also known as "world coordinates". In our scene, objects are defined in world coordinates, which are general 3D coordinates and are not normalized by frame dimensions. To render an image, we conceptually transform points from world space into camera space using the camera's pose.
 
@@ -142,7 +144,7 @@ y_screen_normalized = 2 * ((ys + 0.5) / frame_height) - 1
 
 ```
 
-# Step 4 - Set up near plane
+## Step 4 - Set up near plane
 
 Now that we have normalized screen coordinates, we can map them to a plane that reflects what our image screen should look like. Any viewing ray passing through a corresponding point on this plane will be represented as a pixel on our image.
 
@@ -159,7 +161,7 @@ y_camera_plane = y_screen_normalized * math.tan(fov / 2)
 
 ```
 
-# Step 5 - Point ray from camera to image plane
+## Step 5 - Point ray from camera to image plane
 
 A ray is defined by the equation $r = o + (t * d)$, where o is the origin of the ray, t is a certain distance multiple, and d is a direction vector that is generally of unit magnitude. Using this equation, we can define a ray that starts at origin o, and then traverses t units in d direction.
 
@@ -183,7 +185,7 @@ ray_dirs = ray_dirs / jnp.linalg.norm(ray_dirs, axis=-1, keepdims=True)
 
 ```
 
-# Step 6 - Ray - Sphere intersection
+## Step 6 - Ray - Sphere intersection
 
 The process of ray tracing is done to launch rays from the camera plane into the world, and trace them backwards to see where they have come from. As we do that, we shade the pixels in the colors of the objects we see as it would appear from that angle. Hence, we literally "trace" the paths of rays that would lie on the image plane.
 
@@ -212,7 +214,7 @@ hit_mask = discriminant >= 0.0
 
 ```
 
-# Step 7 - Get valid t (of formula o + td) from intersection discriminant
+## Step 7 - Get valid t (of formula o + td) from intersection discriminant
 
 We must now check the discriminant of this quadratic equation to say that if:
 
@@ -239,7 +241,7 @@ t1 = (-b + sqrt_discriminant) / 2.0
 
 ```
 
-# Step 8 - Apply t to ray and get intersection point
+## Step 8 - Apply t to ray and get intersection point
 
 We use the roots we get to understand which rays did hit the sphere and which did not. Based on that, we recreate the actual rays using our equation by plugging in the value of t we got in the last step. This gives us an equation of a ray that stretches from the origin of the camera all the way to the exact intersection point of that ray with the sphere.
 
@@ -259,7 +261,7 @@ surface_normal_vecs = surface_normal_vecs / jnp.linalg.norm(surface_normal_vecs,
 
 ```
 
-# Step 9 - Apply Phong Shading
+## Step 9 - Apply Phong Shading
 
 Phong Shading, named after it's creator Bui Tuong Phong, describes how we can determine the correct colors for a ray. It is one of many different techniques, but is among the simplest and needs the lowest amount of computations per pixel.
 
@@ -293,7 +295,7 @@ shading = ambient_component + diffuse * diffuse_component
 
 ```
 
-# Step 10 - Render Image and Save
+## Step 10 - Render Image and Save
 
 There we go! We have our shading ops ready, and now we're going to apply it to get the final image.
 
@@ -325,7 +327,7 @@ print("Saved image - raytrace_sphere_jax.png")
 
 ```
 
-# Step 11 - Display Image!
+## Step 11 - Display Image!
 
 ```python
 
@@ -337,7 +339,7 @@ plt.show()
 
 <img src='/images/ray-tracing/ray-traced-image.png' alt='Final raytraced image with a sphere'>
 
-# Conclusion
+## Conclusion
 
 In this JAX port, we've replicated the PyTorch ray tracer using JAX primitives (`jax.numpy`). Key differences from the PyTorch version:
 

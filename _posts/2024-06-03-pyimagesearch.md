@@ -2,8 +2,13 @@
 title: 'PyImageSearch'
 date: 2024-06-03
 permalink: /posts/2024/06/pyimagesearch
+description: "Blog posts written for PyImageSearch covering Docker for ML, GPU development environments, and super-resolution techniques using Hugging Face Diffusers."
 tags:
-  - cool posts
+  - computer vision
+  - docker
+  - super resolution
+  - deep learning
+  - technical writing
 ---
 
 A set of blogs I wrote for PyImageSearch, a reputed Computer-Vision and Deep-Learning educational technology company.
