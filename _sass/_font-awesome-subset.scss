@@ -1,0 +1,101 @@
+/* Font Awesome webfont core plus only the icon selectors used by this site. */
+@import "vendor/font-awesome/functions";
+@import "vendor/font-awesome/variables";
+@import "vendor/font-awesome/mixins";
+@import "vendor/font-awesome/core";
+@import "vendor/font-awesome/fixed-width";
+@import "vendor/font-awesome/animated";
+@import "vendor/font-awesome/screen-reader";
+
+:root, :host {
+  --#{$fa-css-prefix}-style-family-classic: "#{$fa-style-family}";
+  --#{$fa-css-prefix}-font-solid: normal 900 1em/1 "#{$fa-style-family}";
+  --#{$fa-css-prefix}-style-family-brands: "Font Awesome 6 Brands";
+  --#{$fa-css-prefix}-font-brands: normal 400 1em/1 "Font Awesome 6 Brands";
+}
+
+@font-face {
+  font-family: "Font Awesome 6 Free";
+  font-style: normal;
+  font-weight: 900;
+  font-display: $fa-font-display;
+  src: url("#{$fa-font-path}/fa-solid-900.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Font Awesome 6 Brands";
+  font-style: normal;
+  font-weight: 400;
+  font-display: $fa-font-display;
+  src: url("#{$fa-font-path}/fa-brands-400.woff2") format("woff2");
+}
+
+.fas,
+.#{$fa-css-prefix}-solid {
+  font-weight: 900;
+}
+
+.fab,
+.#{$fa-css-prefix}-brands {
+  font-weight: 400;
+}
+
+$site-solid-icons: (
+  building-columns,
+  calendar,
+  clock,
+  envelope,
+  folder-open,
+  key,
+  link,
+  location-dot,
+  rss-square,
+  spinner,
+  tags
+);
+
+$site-brand-icons: (
+  bitbucket,
+  bluesky,
+  codepen,
+  dribbble,
+  facebook,
+  facebook-f,
+  flickr,
+  foursquare,
+  github,
+  goodreads,
+  google-plus-g,
+  instagram,
+  kaggle,
+  lastfm,
+  linkedin,
+  mastodon,
+  medium,
+  pinterest,
+  researchgate,
+  soundcloud,
+  stack-overflow,
+  steam,
+  telegram,
+  tumblr,
+  vine,
+  weibo,
+  wikipedia-w,
+  x-twitter,
+  xing,
+  youtube,
+  zhihu
+);
+
+@each $name in $site-solid-icons {
+  .#{$fa-css-prefix}-#{$name}:before {
+    content: unquote('"#{map-get($fa-icons, $name)}"');
+  }
+}
+
+@each $name in $site-brand-icons {
+  .#{$fa-css-prefix}-#{$name}:before {
+    content: unquote('"#{map-get($fa-brand-icons, $name)}"');
+  }
+}

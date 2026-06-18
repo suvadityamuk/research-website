@@ -50,10 +50,11 @@ class PerformanceRegressionTest < Minitest::Test
   def test_main_stylesheet_uses_the_icon_subset
     manifest = read("assets/css/main.scss")
 
-    assert_includes manifest, '"vendor/font-awesome/subset"'
+    assert_includes manifest, '"font-awesome-subset"'
     refute_includes manifest, '"vendor/font-awesome/fontawesome"'
     refute_includes manifest, '"vendor/font-awesome/solid"'
     refute_includes manifest, '"vendor/font-awesome/brands"'
+    assert_path_exists File.join(ROOT, "_sass", "_font-awesome-subset.scss")
   end
 
   def test_runtime_bundle_does_not_ship_legacy_jquery_plugins
