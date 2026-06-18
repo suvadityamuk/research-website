@@ -1,75 +1,65 @@
-/* ==========================================================================
-   jQuery plugin settings and other scripts
-   ========================================================================== */
+(function () {
+  "use strict";
 
-$(document).ready(function(){
-  // These should be the same as the settings in _variables.scss
-  scssLarge = 925; // pixels
-
-  // Sticky footer
-  var bumpIt = function() {
-      $("body").css("margin-bottom", $(".page__footer").outerHeight(true));
-    },
-    didResize = false;
-
-  bumpIt();
-
-  $(window).resize(function() {
-    didResize = true;
-  });
-  setInterval(function() {
-    if (didResize) {
-      didResize = false;
-      bumpIt();
+  function setupFooter() {
+    var footer = document.querySelector(".page__footer");
+    if (!footer) return;
+    function reserveFooterSpace() {
+      document.body.style.marginBottom = footer.offsetHeight + "px";
     }
-  }, 250);
-  
-  // FitVids init
-  fitvids();
+    reserveFooterSpace();
+    window.addEventListener("resize", reserveFooterSpace, { passive: true });
+    if ("ResizeObserver" in window) new ResizeObserver(reserveFooterSpace).observe(footer);
+  }
 
-  // Follow menu drop down
-  $(".author__urls-wrapper button").on("click", function() {
-    $(".author__urls").fadeToggle("fast", function() {});
-    $(".author__urls-wrapper button").toggleClass("open");
+  function setupAuthorLinks() {
+    var button = document.querySelector(".author__urls-wrapper button");
+    var links = document.querySelector("#author-links");
+    if (!button || !links) return;
+    button.addEventListener("click", function () {
+      var isOpen = button.classList.toggle("open");
+      links.classList.toggle("is-visible", isOpen);
+      button.setAttribute("aria-expanded", String(isOpen));
+    });
+  }
+
+  function setupImagePreview() {
+    var imageLinks = Array.prototype.slice.call(document.querySelectorAll(
+      "a[href$='.jpg'], a[href$='.jpeg'], a[href$='.JPG'], a[href$='.png'], a[href$='.gif']"
+    ));
+    if (!imageLinks.length) return;
+
+    var dialog = document.createElement("dialog");
+    dialog.className = "image-lightbox";
+    dialog.setAttribute("aria-label", "Image preview");
+    dialog.innerHTML = '<button type="button" class="image-lightbox__close" aria-label="Close image preview">&times;</button><img class="image-lightbox__image" alt="">';
+    document.body.appendChild(dialog);
+    var preview = dialog.querySelector("img");
+
+    imageLinks.forEach(function (link) {
+      link.classList.add("image-popup");
+      link.addEventListener("click", function (event) {
+        if (event.button || event.metaKey || event.ctrlKey || event.shiftKey) return;
+        event.preventDefault();
+        var sourceImage = link.querySelector("img");
+        preview.src = link.href;
+        preview.alt = sourceImage ? sourceImage.alt : "";
+        if (typeof dialog.showModal === "function") dialog.showModal();
+        else dialog.setAttribute("open", "");
+      });
+    });
+
+    dialog.querySelector("button").addEventListener("click", function () {
+      dialog.close();
+    });
+    dialog.addEventListener("click", function (event) {
+      if (event.target === dialog) dialog.close();
+    });
+  }
+
+  document.addEventListener("DOMContentLoaded", function () {
+    setupFooter();
+    setupAuthorLinks();
+    setupImagePreview();
   });
-
-  // Restore the follow menu if toggled on a window resize
-  jQuery(window).on('resize', function() {
-    if ($('.author__urls.social-icons').css('display') == 'none' && $(window).width() >= scssLarge) {
-      $(".author__urls").css('display', 'block')
-    }
-  });    
-
-  // init smooth scroll, this needs to be slightly more than then fixed masthead height
-  $("a").smoothScroll({offset: -65});
-
-  // add lightbox class to all image links
-  $("a[href$='.jpg'],a[href$='.jpeg'],a[href$='.JPG'],a[href$='.png'],a[href$='.gif']").addClass("image-popup");
-
-  // Magnific-Popup options
-  $(".image-popup").magnificPopup({
-    type: 'image',
-    tLoading: 'Loading image #%curr%...',
-    gallery: {
-      enabled: true,
-      navigateByImgClick: true,
-      preload: [0,1] // Will preload 0 - before current, and 1 after the current image
-    },
-    image: {
-      tError: '<a href="%url%">Image #%curr%</a> could not be loaded.',
-    },
-    removalDelay: 500, // Delay in milliseconds before popup is removed
-    // Class that is added to body when popup is open.
-    // make it unique to apply your CSS animations just to this exact popup
-    mainClass: 'mfp-zoom-in',
-    callbacks: {
-      beforeOpen: function() {
-        // just a hack that adds mfp-anim class to markup
-        this.st.image.markup = this.st.image.markup.replace('mfp-figure', 'mfp-figure mfp-with-anim');
-      }
-    },
-    closeOnContentClick: true,
-    midClick: true // allow opening popup on middle mouse click. Always set it to true if you don't provide alternative source.
-  });
-
-});
+})();

@@ -10,7 +10,8 @@
 <link rel="manifest" href="{{ base_path }}/images/manifest.json"/>
 <link rel="icon" href="/images/favicon.ico"/>
 <meta name="theme-color" content="#ffffff"/>
-<link rel="stylesheet" href="{{ base_path }}/assets/css/academicons.css"/>
+<link rel="preload" as="style" href="{{ base_path }}/assets/css/academicons.css" onload="this.onload=null;this.rel='stylesheet'"/>
+<noscript><link rel="stylesheet" href="{{ base_path }}/assets/css/academicons.css"/></noscript>
 
 <!-- Support for MathJax (conditionally loaded for performance) -->
 {% if page.mathjax %}

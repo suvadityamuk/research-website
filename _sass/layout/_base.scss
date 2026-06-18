@@ -5,6 +5,14 @@ html {
   /* sticky footer fix */
   position: relative;
   min-height: 100%;
+  scroll-behavior: smooth;
+  scroll-padding-top: 65px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
 }
 
 body {
@@ -22,6 +30,38 @@ body {
     /* when primary navigation is visible, the content in the background won't scroll */
     overflow: hidden;
   }
+}
+
+.image-lightbox {
+  max-width: min(92vw, 1200px);
+  max-height: 92vh;
+  padding: 0;
+  border: 0;
+  background: transparent;
+
+  &::backdrop {
+    background: rgba(#000, 0.82);
+  }
+}
+
+.image-lightbox__image {
+  display: block;
+  max-width: 92vw;
+  max-height: 88vh;
+}
+
+.image-lightbox__close {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 44px;
+  height: 44px;
+  border: 0;
+  background: rgba(#000, 0.65);
+  color: #fff;
+  font-size: 2rem;
+  line-height: 1;
+  cursor: pointer;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -334,7 +374,7 @@ nav {
       opacity: 1;
     }
   }
-  
+
   @keyframes intro {
     0% {
       opacity: 0;
@@ -368,4 +408,3 @@ b, i, strong, em, blockquote, p, q, span, figure, img, h1, h2, header, input, a,
       display: none;
     }
   }
-  

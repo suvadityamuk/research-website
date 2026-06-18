@@ -23,7 +23,7 @@ repository               : "suvadityamuk/research-website"
 #               Additional customization can be done by editing /_includes/author-profile.html
 author:
   # Biographic information
-  avatar           : "profile.png"
+  avatar           : "profile-350.jpg"
   name             : "Suvaditya Mukherjee"
   pronouns         : "he/him"  
   bio              : "ML @ USC, Google Developer Expert for AI and Google Cloud"

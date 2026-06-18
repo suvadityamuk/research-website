@@ -1,42 +1,38 @@
 {% if site.repository and site.staticman.branch %}
   <script>
-    (function ($) {
-    var $comments = $('.js-comments');
+    document.addEventListener('DOMContentLoaded', function () {
+      var form = document.querySelector('#new_comment');
+      if (!form) return;
 
-    $('#new_comment').submit(function () {
-      var form = this;
+      var submit = document.querySelector('#comment-form-submit');
+      var notice = document.querySelector('.page__comments-form .js-notice');
+      var noticeText = document.querySelector('.page__comments-form .js-notice-text');
 
-      $(form).addClass('disabled');
-      $('#comment-form-submit').html('<i class="fa fa-spinner fa-spin fa-fw"></i> {{ site.data.ui-text[site.locale].loading_label | default: "Loading..." }}');
+      function showAlert(message, type) {
+        notice.classList.remove('hidden', 'notice--danger', 'notice--success');
+        notice.classList.add(type);
+        noticeText.textContent = message;
+      }
 
-      $.ajax({
-        type: $(this).attr('method'),
-        url: $(this).attr('action'),
-        data: $(this).serialize(),
-        contentType: 'application/x-www-form-urlencoded',
-        success: function (data) {
-          $('#comment-form-submit').html('{{ site.data.ui-text[site.locale].comment_btn_submitted | default: "Submitted" }}');
-          $('.page__comments-form .js-notice').removeClass('notice--danger');
-          $('.page__comments-form .js-notice').addClass('notice--success');
-          showAlert('{{ site.data.ui-text[site.locale].comment_success_msg | default: "Thanks for your comment! It will show on the site once it has been approved." }}');
-        },
-        error: function (err) {
-          console.log(err);
-          $('#comment-form-submit').html('{{ site.data.ui-text[site.locale].comment_btn_submit  | default: "Submit Comment" }}');
-          $('.page__comments-form .js-notice').removeClass('notice--success');
-          $('.page__comments-form .js-notice').addClass('notice--danger');
-          showAlert('{{ site.data.ui-text[site.locale].comment_error_msg | default: "Sorry, there was an error with your submission. Please make sure all required fields have been completed and try again." }}');
-          $(form).removeClass('disabled');
-        }
+      form.addEventListener('submit', function (event) {
+        event.preventDefault();
+        form.classList.add('disabled');
+        submit.innerHTML = '<i class="fa fa-spinner fa-spin fa-fw"></i> {{ site.data.ui-text[site.locale].loading_label | default: "Loading..." }}';
+
+        fetch(form.action, {
+          method: form.method,
+          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+          body: new URLSearchParams(new FormData(form))
+        }).then(function (response) {
+          if (!response.ok) throw new Error('Comment submission failed');
+          submit.textContent = '{{ site.data.ui-text[site.locale].comment_btn_submitted | default: "Submitted" }}';
+          showAlert('{{ site.data.ui-text[site.locale].comment_success_msg | default: "Thanks for your comment! It will show on the site once it has been approved." }}', 'notice--success');
+        }).catch(function () {
+          submit.textContent = '{{ site.data.ui-text[site.locale].comment_btn_submit | default: "Submit Comment" }}';
+          showAlert('{{ site.data.ui-text[site.locale].comment_error_msg | default: "Sorry, there was an error with your submission. Please make sure all required fields have been completed and try again." }}', 'notice--danger');
+          form.classList.remove('disabled');
+        });
       });
-
-      return false;
     });
-
-    function showAlert(message) {
-      $('.page__comments-form .js-notice').removeClass('hidden');
-      $('.page__comments-form .js-notice-text').html(message);
-    }
-  })(jQuery);
   </script>
 {% endif %}
