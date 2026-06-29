@@ -44,6 +44,35 @@ redirect_from:
 
 <table style="width: 100%; border: none; border-collapse: collapse; font-size: 1.05em;">
 
+  <tr style="border: none;">
+    <!-- Left Cell: Company & Position -->
+    <td style="border: none; vertical-align: top; padding-bottom: 5px;">
+      <strong>Hugging Face</strong><br>
+      Current: ML Developer Advocate Engineer for 3D and Computer Vision (Full-time)
+    </td>
+    <!-- Right Cell: Date & Location -->
+    <td style="border: none; text-align: right; vertical-align: top; padding-bottom: 5px;">
+      <em style="font-weight: bold;">June 2026 - Present</em><br>
+      <em style="font-style: italic;">Los Angeles, CA, USA</em>
+    </td>
+  </tr>
+  <!-- Description Rows -->
+  <tr style="border: none;">
+    <td colspan="2" style="border: none; padding-left: 20px; vertical-align: top;">
+      <strong>Research Collaborations with Academic Labs:</strong> Helping establish research collaborations with top-tier labs around the world working on 3D Generation and adjacent tasks, to help them onboard and work with Hugging Face teams.
+    </td>
+  </tr>
+  <tr style="border: none;">
+    <td colspan="2" style="border: none; padding-left: 20px; vertical-align: top;">
+      <strong>Supporting onboarding of 3D Models:</strong> Helping researchers onboard their 3D models to the Hugging Face Hub, ensuring they are properly documented and optimized for use with our tools and workflows.
+    </td>
+  </tr>
+  <tr style="border: none;">
+    <td colspan="2" style="border: none; padding-left: 20px; vertical-align: top;">
+      <strong>Documenting workflows:</strong> Creating comprehensive documentation and tutorials to showcase how researchers and developers can leverage the wider Hugging Face ecosystem of tools and infrastructure for their 3D generation projects.
+    </td>
+  </tr>
+
   <!-- Magnopus LLC -->
   <tr style="border: none;">
     <!-- Left Cell: Company & Position -->

@@ -9,11 +9,11 @@ redirect_from:
 
 <!-- # About Me -->
 
-I am a Master of Science student in Computer Science (Artificial Intelligence) at the University of Southern California (USC). My interests lie primarily in Deep Learning and Generative AI, focusing on areas like 3D Generation, Generative Media, Computer Vision, and Efficiency Optimization. Previously, I obtained my Bachelor of Technology in Computer Science (AI) from NMIMS University (Mumbai, India).
+I am a ML Developer Advocate Engineer for 3D and Computer Vision at [Hugging Face](https://huggingface.co/). My interests lie primarily in Deep Learning and Generative AI, focusing on areas like 3D Generation, Generative Media, Computer Vision, and Inference Optimization. Previously, I graduated as a Master of Science in Computer Science (Artificial Intelligence) at the University of Southern California (USC) and obtained my Bachelor of Technology in Computer Science (AI) from NMIMS University (Mumbai, India).
 
-I currently work as a Machine Learning Engineer at [Magnopus](https://www.magnopus.com/), where I am involved in efforts for optimizing 3D Generative models and exploring the use of AI for rapidly creating 3D worlds in [Oko](https://www.oko.live/).
+Previously, I was a Machine Learning Engineer at [Magnopus](https://www.magnopus.com/), where I was involved in efforts for optimizing 3D Generative models and exploring the use of AI for rapidly creating 3D worlds in [Oko](https://www.oko.live/).
 
-I am honored to be currently associated with [Prof. Benjamin Nye](https://sites.google.com/site/benjaminnye/) at the [Learning Sciences Lab](https://ict.usc.edu/research/labs-groups/learning-sciences/) of [USC ICT](https://ict.usc.edu/) and [Prof. Mark Bolas](https://www.markbolas.com/) at the [USC School of Cinematic Arts](https://cinema.usc.edu/interactive/index.cfm).
+I was honored to be associated with [Prof. Benjamin Nye](https://sites.google.com/site/benjaminnye/) at the [Learning Sciences Lab](https://ict.usc.edu/research/labs-groups/learning-sciences/) of [USC ICT](https://ict.usc.edu/) and [Prof. Mark Bolas](https://www.markbolas.com/) at the [USC School of Cinematic Arts](https://cinema.usc.edu/interactive/index.cfm), leading his efforts to run the [Mixed Intelligence Lab](https://github.com/USC-Mixed-Intelligence-Lab).
 
 ## News
 
