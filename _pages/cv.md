@@ -83,7 +83,7 @@ redirect_from:
     </td>
     <!-- Right Cell: Date & Location -->
     <td style="border: none; text-align: right; vertical-align: top; padding-bottom: 5px;">
-      <em style="font-weight: bold;">June 2025 - Present</em><br>
+      <em style="font-weight: bold;">June 2025 - May 2026</em><br>
       <em style="font-style: italic;">Los Angeles, CA, USA</em>
     </td>
   </tr>
