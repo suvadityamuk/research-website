@@ -59,17 +59,17 @@ redirect_from:
   <!-- Description Rows -->
   <tr style="border: none;">
     <td colspan="2" style="border: none; padding-left: 20px; vertical-align: top;">
-      <strong>Research Collaborations with Academic Labs:</strong> Helping establish research collaborations with top-tier labs around the world working on 3D Generation and adjacent tasks, to help them onboard and work with Hugging Face teams.
+      <strong>Ecosystem Documentation and Technical Content:</strong> Author technical guides and comprehensive tutorials illustrating the utilization of the Hugging Face stack for 3D generative AI research and development.
     </td>
   </tr>
   <tr style="border: none;">
     <td colspan="2" style="border: none; padding-left: 20px; vertical-align: top;">
-      <strong>Supporting onboarding of 3D Models:</strong> Helping researchers onboard their 3D models to the Hugging Face Hub, ensuring they are properly documented and optimized for use with our tools and workflows.
+      <strong>3D Asset Integration and Hub Onboarding:</strong> Facilitate the integration of research-grade 3D models into the Hugging Face Hub, managing comprehensive documentation and performance optimization for seamless ecosystem compatibility.
     </td>
   </tr>
   <tr style="border: none;">
     <td colspan="2" style="border: none; padding-left: 20px; vertical-align: top;">
-      <strong>Documenting workflows:</strong> Creating comprehensive documentation and tutorials to showcase how researchers and developers can leverage the wider Hugging Face ecosystem of tools and infrastructure for their 3D generation projects.
+      <strong>Cross-Institutional Academic Research Partnerships:</strong> Cultivate strategic alliances with premier global laboratories specializing in 3D Generative AI; coordinate onboarding and collaborative initiatives alongside internal Hugging Face engineering teams.
     </td>
   </tr>
 
